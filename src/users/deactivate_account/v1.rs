@@ -2,6 +2,9 @@
 
 use ruma::{api::ruma_api, UserId};
 
+fn default_false() -> bool { false }
+fn is_false(b: &bool) -> bool { b == &false }
+
 ruma_api! {
     metadata: {
         description: "Deactivate a user account",
@@ -19,7 +22,7 @@ ruma_api! {
 
         /// Decides whether to erase the account. See the Synapse documentation for the specifics on
         /// what this means.
-        #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
+        #[serde(default = "default_false", skip_serializing_if = "is_false")]
         pub erase: bool,
     }
 
